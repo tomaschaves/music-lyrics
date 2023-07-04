@@ -1,0 +1,13 @@
+{
+  "name": "music-lyrics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:back": "cd ./backend && npm install",
+    "install:apps": "npm run install:back"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
