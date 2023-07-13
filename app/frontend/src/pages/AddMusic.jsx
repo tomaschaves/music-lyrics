@@ -1,11 +1,19 @@
 import { useState } from 'react'
+import './AddMusic.css'
 
 export default function AddMusic() {
   const [lyricState, setLyricState] = useState({'title': '', 'lyric': '', 'annotations': ''});
 
   const registerMusic = (event) => {
     event.preventDefault();
-    console.log(lyricState);
+    console.log(JSON.stringify(lyricState));
+  }
+
+  const handleSubmit = () => {
+    const { title, lyric,annotations} = lyricState;
+    const checkLength = [title, lyric, annotations];
+    console.log(title, lyric,annotations);
+    return checkLength.some((item) => item.length === 0);
   }
 
   return (
@@ -24,15 +32,13 @@ export default function AddMusic() {
         <br />
         <textarea id='lyric' value={lyricState.lyric} name='lyric' cols='50' rows='40' onChange={ ({target: { value }}) => setLyricState({...lyricState, lyric: value })} />
       </label>
-      <br />
-      <br />
       <label htmlFor='annotations'>
         Annotations:
         <br />
         <textarea id='annotations' value={lyricState.annotations} cols='50' rows='40' onChange={ ({target: { value }}) => setLyricState({...lyricState, annotations: value })} />
       </label>
       </div>
-      <button type='submit'>Adicionar</button>
+      <button type='submit' disabled={handleSubmit()}>Add</button>
     </form>
   )
 }
