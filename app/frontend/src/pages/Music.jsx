@@ -4,6 +4,6 @@ export default function Music() {
   const xablau = useParams().id;
   console.log(xablau);
   return (
-    <div>Music</div>
+    <div>Music {xablau}</div>
   )
 }

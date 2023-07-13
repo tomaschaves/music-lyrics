@@ -12,7 +12,6 @@ export default function AddMusic() {
   const handleSubmit = () => {
     const { title, lyric,annotations} = lyricState;
     const checkLength = [title, lyric, annotations];
-    console.log(title, lyric,annotations);
     return checkLength.some((item) => item.length === 0);
   }
 

@@ -1,11 +1,18 @@
 // src/app.js
 
 const express = require('express');
-
 const lyrics = require('./controllers/lyrics.controller');
 
 const app = express();
 
+// código para as requisições vindas do front-end funcionarem
+const accessControl = (_req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+  res.header('Access-Control-Allow-Headers', '*');
+  next();
+};
+app.use(accessControl);
 app.use(express.json());
 
 // Este endpoint usa o método findOne do Sequelize para buscar um usuário pelo id e email.
