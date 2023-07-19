@@ -5,7 +5,7 @@ Equivale a fazer a query: SELECT * FROM Users */
 const getAllLyrics = async () => {
   const allLyrics = await lyrics.findAll();
 
-  return allLyrics.map((lyric) => lyric.title);
+  return allLyrics.map((lyric) => [lyric.id, lyric.title]);
 };
 
 /* Esta função usa o método findByPk do Sequelize para buscar um usuário pelo id.

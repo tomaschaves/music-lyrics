@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
-// const axios = require('axios');
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Listmusics() {
-    const [musics, setMusics] = useState([]);
+  const [musics, setMusics] = useState([]);
 
 
   const getMusics = () => {
-    axios.get('http://localhost:3001/lyric')
-    .then(function (response) {
-      // manipula o sucesso da requisição
-      console.log(response);
-    })
-    // fetch('http://localhost:3001/lyric').then((response) => console.log(response));
+      axios.get('http://localhost:3001/lyric')
+      .then(function (response) {
+        console.log(response.data);
+        setMusics(response.data)
+      })
   }
 
   useEffect(() => {
-    getMusics();
+    if(musics.length === 0){
+      getMusics();
+    }
   }, [])
 
-  console.log('principal');
   return (
-    <div>Listmusics</div>
+    <div>
+      {musics && musics.map((music) => (
+        <div key={music[0]}>
+          <Link to={`/music/${music[0]}`}>
+            {music[1]}
+          </Link>
+        </div>
+      ))}
+    </div>
   )
 }

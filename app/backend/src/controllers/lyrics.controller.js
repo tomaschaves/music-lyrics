@@ -4,8 +4,8 @@ const error500Message = 'Algo deu errado';
 
 const getAllLyricsTitles = async (_req, res) => {
   try {
-    const users = await lyricsService.getAllLyrics();
-    return res.status(200).json(users);
+    const lyrics = await lyricsService.getAllLyrics();
+    return res.status(200).json(lyrics);
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ message: 'Ocorreu um erro' });
