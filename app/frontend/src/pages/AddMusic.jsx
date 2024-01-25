@@ -1,12 +1,22 @@
 import { useState } from 'react'
 import './AddMusic.css'
+import axios from 'axios';
 
 export default function AddMusic() {
-  const [lyricState, setLyricState] = useState({'title': '', 'lyric': '', 'annotations': ''});
+  const [lyricState, setLyricState] = useState({title: '', lyric: '', annotations: ''});
 
   const registerMusic = (event) => {
     event.preventDefault();
-    console.log(JSON.stringify(lyricState));
+    axios.post(`http://localhost:3001/lyric/`, {
+      title: lyricState.title,
+      lyric: lyricState.lyric,
+      annotations: lyricState.annotations,
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
   }
 
   const handleSubmit = () => {

@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Music() {
 
   const [musicInfo, setMusicInfo] = useState([]);
   const id = useParams().id
+  const history = useHistory();
 
 
-  const getMusicInfo = () => {
+  const getMusicInfo = async () => {
+    // const xablau = await fetch(`http://localhost:3001/lyric/${id}`)
+    // const response = await xablau.json()
+    // console.log(response);
       axios.get(`http://localhost:3001/lyric/${id}`)
       .then(function (response) {
         console.log(response.data);
@@ -42,6 +46,7 @@ export default function Music() {
       .catch(function (error) {
         console.error(error);
       });
+    history.push('/');
   }
 
   useEffect(() => {
@@ -53,15 +58,18 @@ export default function Music() {
   return (
     <div>
       {
-        musicInfo && <h1>{musicInfo.title}</h1>
-      }
-      <form>
+        musicInfo &&
+        <div>
 
-      <textarea  cols='50' rows='40' value={musicInfo.lyric} onChange={ ({ target: { value } }) => setMusicInfo({...musicInfo, lyric: value })} />
-      <textarea  cols='50' rows='40' value={musicInfo.annotations} onChange={ ({target: { value }}) => setMusicInfo({...musicInfo, annotations: value })} />
-      <button type="button" onClick={saveMusic}>Salvar</button>
-      <button type="button" onClick={deleteMusic}>Deletar</button>
-      </form>
+        <h1>{musicInfo.title}</h1>
+        <form>
+            <textarea  cols='50' rows='40' value={musicInfo.lyric} onChange={ ({ target: { value } }) => setMusicInfo({...musicInfo, lyric: value })} />
+            <textarea  cols='50' rows='40' value={musicInfo.annotations} onChange={ ({target: { value }}) => setMusicInfo({...musicInfo, annotations: value })} />
+            <button type="button" onClick={saveMusic}>Salvar</button>
+            <button type="button" onClick={deleteMusic}>Deletar</button>
+          </form>
+        </div>
+      }
     </div>
   )
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "db:reset": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
+    "db:reset": "docker exec music_lyrics_db /usr/bin/mysqldump -u root --password=music-lyrics lyrics > backup.sql && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "prestart": "npm run db:reset",
     "start": "node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",

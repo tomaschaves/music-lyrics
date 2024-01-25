@@ -1,0 +1,5 @@
+Para fazer backup:
+docker exec music_lyrics_db /usr/bin/mysqldump -u root --password=music-lyrics lyrics > backup2.sql
+
+Para restaurar um backup:
+cat backup.sql | docker exec -i music_lyrics_db /usr/bin/mysql -u root --password=music-lyrics lyrics
